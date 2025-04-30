@@ -3,6 +3,6 @@
 #include "rwFunc.hpp"
 
 int print_struct(const phone *ph, const int count);
-int menu();
+int menu(phone *phone_array, int count);
 
 #endif // MENU_HPP

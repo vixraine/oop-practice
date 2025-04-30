@@ -11,10 +11,10 @@ int read_file(phone *ph, int *count) {
 
 	ifstream in("device.db"); // ifstream - Input File STREAM
 
-	// kinda magic? check if file exists by calling its .good value
+	// check if file exists by calling its .good value
 	// if It Aint Good, don't proceed
 	if (!in.good()) { 
-		// cerr - prints to stderr. Internet Knowledge
+		// cerr - prints to stderr
 		cerr << "barbeque bacon burger" << endl;
 		return EXIT_FAILURE;
 	}
@@ -24,8 +24,8 @@ int read_file(phone *ph, int *count) {
 	istringstream token;
 
 	while (getline(in, input_string)) {
-		// debug print
-		// cout << "WHOLE STRING: " << input_string;
+		// debug print (commenting out because it prints into terminal)
+		// clog << "[CLOG] WHOLE STRING: " << input_string;
 		
 		token.str(input_string);
 
@@ -34,7 +34,8 @@ int read_file(phone *ph, int *count) {
 		// and because we cannot really iterate splitting the string
 		// because of differing data types, we Stupidly ""Iterate""
 		// through the string, effectively inflating a simple strtok
-		// function into this mess.
+		// function into this mess. special props to int properties
+		// being unwritable with this function because you NEED a std::string
 		string temp;
 		getline(token, temp, ';');  // I CHANGED MY MIND. I HATE C++
 		ph[i].id = stoi(temp);
@@ -51,8 +52,11 @@ int read_file(phone *ph, int *count) {
 	}
 
 	// passing *count as NULL returns a nullptr which is. yeah
+	//   (this is from debugging & lazy vixxy)
 	*count = i; 
 	in.close();
+
+	clog << "[CLOG] he was running from a cop car (read file & wrote struct data)" << endl;
 
 	return EXIT_SUCCESS;
 }
@@ -69,6 +73,7 @@ int write_file(const phone *ph, const int count) {
 	ofstream out("dataout.db");
 
 	if (!out.good()) {
+		// probably never happens but oh well
 		cerr << "Cabron. I need to see your BOSS." << endl
 			 << "[ could not create output file. (What?) ]" << endl; 
 		return EXIT_FAILURE;
@@ -77,17 +82,15 @@ int write_file(const phone *ph, const int count) {
 	string output_string;
 
 	for (int i = 0; i < count; i++) {
-		// format is apparently quite new so it wont work in MSVS 2015. bummer
+		// format is apparently quite new so it wont work even in MSVS 2015. bummer
 		output_string = to_string(ph[i].id) + ";" + ph[i].make + ";" + ph[i].model + ";"
 			+ to_string(ph[i].in_stork) + ";" + to_string(ph[i].type) + ";" + to_string(ph[i].price) + ";";
 		out << output_string << endl;
 	}
 
-	// count = i; // count is const. shouldn't redefine?
-	// this probably shouldn't even be here tbh,, we'll see
 	out.close();
 
-	cout << "wrote file :] (probably)" << endl;
+	clog << "[CLOG] wrote file :] (probably)" << endl;
 
 	return EXIT_SUCCESS;
 }
