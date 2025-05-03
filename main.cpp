@@ -1,19 +1,20 @@
-#include "rwFunc.hpp"
 #include "menu.hpp"
+#include "rwFunc.hpp"
 #include <iostream>
 
 using namespace std;
 
-int main() {
-	int count = 0;
-    int glorpy = 0;  // debug read flag
-	int dingus = 0;  // debug write flag
-	int gloopy = 0;  // debug print flag
-	const int item_amt = 10;  // 10 is the constant required amt
+int main()
+{
+    int count = 0;
+    int glorpy = 0;          // debug read flag
+    int dingus = 0;          // debug write flag
+    int gloopy = 0;          // debug print flag
+    const int item_amt = 10; // 10 is the constant required amt
 
-	phone phone_array[item_amt];
+    phone phone_array[item_amt];
 
-	/*  commenting out because its debug code
+    /*  commenting out because its debug code
 	// debug read
 	if (glorpy) { 
 		read_file(phone_array, &count);
@@ -30,8 +31,10 @@ int main() {
 	}
 	*/
 
-	menu(phone_array, count);
+    menu(phone_array, count);
 
-	// cin.get();
-	return 0;
+    // debug pause before quit; unnecessary in prod
+    // cin.get();
+    // cin.get();
+    return 0;
 }
