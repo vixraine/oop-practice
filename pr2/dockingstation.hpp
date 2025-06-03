@@ -1,0 +1,33 @@
+#ifndef DOCKINGSTATION_HPP
+#define DOCKINGSTATION_HPP
+
+#include "hub.hpp"
+#include <iostream>
+
+// class definition
+class DockingStation: public USBHub {
+private:
+    int hdmi_ports;
+    int ethernet_mbit;
+    bool hot_plug;
+public:
+    DockingStation();
+    DockingStation(const std::string& man,
+                   const std::string& mdl,
+                   const int usbs,
+                   const int hdmis,
+                   const int ethernet,
+                   const bool hot);
+
+    void set_hdmi_ports(const int hdmis);
+    void set_ethernet_mbit(const int ethernet);
+    void set_hot_plug(const bool hot);
+
+    int get_hdmi_ports();
+    std::string get_ethernet_mbit();
+    std::string get_hot_plug();
+
+    void printInfo() override;
+};
+
+#endif // DOCKINGSTATION_HPP
